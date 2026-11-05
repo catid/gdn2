@@ -1,0 +1,39 @@
+# ===========================================================================
+# Gated DeltaNet-2 - minimal Python requirements
+# Base image assumed: pytorch/pytorch:2.9.0-cuda12.8-cudnn9-devel
+# System packages (apt, not pip): git
+# ===========================================================================
+
+# --- Core ------------------------------------------------------------------
+torch==2.9.0
+numpy
+einops
+transformers
+datasets==2.20.0
+lightning==2.1.2
+wandb
+sentencepiece
+tokenizers
+typing_extensions
+
+# --- Build helpers (needed to compile flash-attn / fla from source) --------
+ninja
+packaging
+
+# ===========================================================================
+# MANUAL INSTALL - run AFTER `pip install -r requirements.txt`.
+# These need custom build flags / git sources and won't work as plain lines.
+#
+#   pip install --no-cache-dir "flash-attn==2.8.3" --no-build-isolation
+#
+#   pip install --no-cache-dir -U \
+#       git+https://github.com/sustcsonglin/flash-linear-attention \
+#       --no-build-isolation
+#
+#   pip uninstall torchdata -y || true
+#   pip install --pre --no-cache-dir torchdata \
+#       --index-url https://download.pytorch.org/whl/nightly
+#
+# Note: `triton` is imported by the repo but ships bundled with the Linux
+# `torch` wheel, so it does not need a separate line.
+# ===========================================================================
